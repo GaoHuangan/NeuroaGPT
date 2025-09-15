@@ -11,14 +11,15 @@ const startServer = async () => {
   app.use(cors());
   app.use(express.json());
 
-  app.get('/', (req, res) => {
+  app.get('/', (_req, res) => {
     res.send('<h1>server is running</h1>');
   });
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
-    console.log(`✅ Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
   });
 };
 
 startServer();
+
