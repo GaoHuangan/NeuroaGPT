@@ -1,8 +1,6 @@
 import jwt from "jsonwebtoken";
 
-interface JwtPayload {
-  id: string;
-}
+type JwtPayload = Record<string, unknown>;
 
 const generateToken = (
   payload: JwtPayload,

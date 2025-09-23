@@ -2,11 +2,11 @@
 import User, { IUser } from "../models/User";
 import { comparePassword } from "../utils/password";
 import AppError from "../utils/appError";
+import generateToken from "../utils/jwt";
+import { UserLoginDTO } from "../dao/userLogin.dto";
 
-export const loginUserService = async (
-  email: string,
-  password: string
-): Promise<IUser> => {
+export const loginUserService = async (inData:UserLoginDTO): Promise<{ token: string }> => {
+  const { email, password } = inData;
   const user = await User.findOne({ email }).select("+password");
   if (!user) {
     throw new AppError("Invalid credentials", 401);
@@ -16,6 +16,6 @@ export const loginUserService = async (
   if (!isMatch) {
     throw new AppError("Invalid credentials", 401);
   }
-
-  return user;
+  const token = generateToken({ id: String(user._id) });
+  return { token };
 };

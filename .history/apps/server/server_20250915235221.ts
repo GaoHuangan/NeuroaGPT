@@ -1,8 +1,7 @@
 import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
-import { connectToDB } from './config/server';
-import router from './routers/userRouters';
+import { connectToDB } from './config/server.js';
 
 const app = express();
 
@@ -11,7 +10,6 @@ const startServer = async () => {
 
   app.use(cors());
   app.use(express.json());
-  app.use("/api/users", router);
 
   app.get('/', (_req, res) => {
     res.send('<h1>server is running</h1>');
@@ -24,3 +22,4 @@ const startServer = async () => {
 };
 
 startServer();
+

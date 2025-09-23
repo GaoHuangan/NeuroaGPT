@@ -7,7 +7,7 @@ import { UserLoginDTO } from "../dao/userLogin.dto.js";
 export const LoginUser = async (req: Request, res: Response) => {
     try {
         const inData = req.body as UserLoginDTO;
-        const result = await loginUserService(inData);
+        const result = await loginUserService(inData.email, inData.password);
         
         return res.status(200).json({
             success: true,
