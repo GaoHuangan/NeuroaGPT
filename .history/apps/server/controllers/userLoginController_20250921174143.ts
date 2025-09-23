@@ -1,18 +1,18 @@
 // apps/server/controllers/userController.ts
 import { Request, Response } from "express";
-import { loginUserService } from "../service/userLoginService.js";
+import { loginUserService } from "../service/userTokenService.js";
 import { UserLoginDTO } from "../dao/userLogin.dto.js";
 
 // login
 export const LoginUser = async (req: Request, res: Response) => {
     try {
-        const inData = req.body as UserLoginDTO;
-        const result = await loginUserService(inData);
+        const data = req.body as UserLoginDTO;
+        const result = await loginUserService(data.email, data.password);
         
         return res.status(200).json({
             success: true,
             message: "User logged in successfully",
-            token: result.token,
+            ...result,
         });
     } catch (error: any) {
         return res.status(error.statusCode || 500).json({

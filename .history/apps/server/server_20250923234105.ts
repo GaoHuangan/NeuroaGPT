@@ -1,8 +1,8 @@
 import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
-import { connectToDB } from './config/server';
-import router from './routers/userRouters';
+import { connectToDB } from './config/server.js';
+import router from './routers/userRouters.js';
 
 const app = express();
 
@@ -24,3 +24,4 @@ const startServer = async () => {
 };
 
 startServer();
+
