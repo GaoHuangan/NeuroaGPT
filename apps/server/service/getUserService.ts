@@ -1,4 +1,4 @@
-import AppError from "../utils/appError";
+import AppError from "../utils/appError.js";
 import { Request } from "express";
 
 export const getUserService = async (req: Request) => {
