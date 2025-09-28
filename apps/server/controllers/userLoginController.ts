@@ -2,6 +2,7 @@
 import { Request, Response } from "express";
 import { loginUserService } from "../service/userLoginService.js";
 import { UserLoginDTO } from "../dao/userLogin.dto.js";
+import logger from "../utils/logger.js";
 
 // login
 export const LoginUser = async (req: Request, res: Response) => {
@@ -15,6 +16,7 @@ export const LoginUser = async (req: Request, res: Response) => {
             token: result.token,
         });
     } catch (error: any) {
+        logger.error("Login failed", { error });
         return res.status(error.statusCode || 500).json({
             success: false,
             message: error.message || "Internal Server Error",

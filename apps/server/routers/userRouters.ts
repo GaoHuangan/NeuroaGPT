@@ -1,8 +1,8 @@
 import express from "express";
-import { getUser } from "../controllers/getUserController";
-import { registerUser } from "../controllers/userRegisterController";
-import { LoginUser } from "../controllers/userLoginController";
-import { protect } from "../middleware/auth";
+import { getUser } from "../controllers/getUserController.js";
+import { registerUser } from "../controllers/userRegisterController.js";
+import { LoginUser } from "../controllers/userLoginController.js";
+import { protect } from "../middleware/auth.js";
 
 const router = express.Router();
 

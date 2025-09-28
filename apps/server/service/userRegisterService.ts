@@ -1,8 +1,8 @@
 // apps/server/service/userService.ts
-import User, { IUser } from "../models/User";
-import { hashPassword, comparePassword } from "../utils/password";
-import { UserRegisterDTO } from "../dao/userRegister.dto";
-import AppError from "../utils/appError";
+import User, { IUser } from "../models/User.js";
+import { hashPassword } from "../utils/password.js";
+import { UserRegisterDTO } from "../dao/userRegister.dto.js";
+import AppError from "../utils/appError.js";
 
 export const registerUserService = async (inData: UserRegisterDTO) => {
   const { name, email, password } = inData;
