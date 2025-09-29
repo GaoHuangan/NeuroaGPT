@@ -1,15 +1,14 @@
 import { Request, Response } from "express";
+import { getUserService } from "../service/getUserService.js";
 import AppError from "../utils/appError.js";
-import { createNewChatService } from "../service/createNewChatService.js";
 
-export const createNewChatController = async (req: Request, res: Response) => {
+export const getUser = async (req: Request, res: Response) => {
   try {
-    const chat = await createNewChatService(req, res);
+    const user = await getUserService(req);
 
     return res.status(200).json({
       success: true,
-      data: chat,
-      message: "Chat created successfully",
+      user,
     });
   } catch (error: any) {
     return new AppError(error.message || "Internal Server Error", error.statusCode || 500);

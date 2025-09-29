@@ -1,7 +1,7 @@
 // apps/server/controllers/userController.ts
 import { Request, Response } from "express";
 import { registerUserService } from "../service/userRegisterService.js";
-import { UserRegisterDTO } from "../dao/userRegister.dto.js";
+import { UserRegisterDTO } from "../dao/userRegister.dto";
 import logger from "../utils/logger.js";  // ✅ 引入日志工具
 
 export const registerUser = async (req: Request, res: Response) => {

@@ -5,7 +5,6 @@ import { ENV } from "./db.js";
 import errorHandler from "../middleware/errorMiddleware.js";
 import requestLogger from "../middleware/requestLogger.js";
 import userRouter from "../routers/userRouters.js";
-import chatRouter from "../routers/chatRouters.js";
 
 const app = express();
 
@@ -16,7 +15,6 @@ app.use(requestLogger);
 
 // Routes
 app.use("/api/users", userRouter);
-app.use("/api/chat", chatRouter);
 
 app.get("/", (_req, res) => {
   res.send("🚀 API is running");

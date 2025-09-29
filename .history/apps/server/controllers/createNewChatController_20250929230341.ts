@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import AppError from "../utils/appError.js";
 import { createNewChatService } from "../service/createNewChatService.js";
 
-export const createNewChatController = async (req: Request, res: Response) => {
+export const createNewChat = async (req: Request, res: Response) => {
   try {
     const chat = await createNewChatService(req, res);
 
