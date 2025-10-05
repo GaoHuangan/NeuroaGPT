@@ -8,6 +8,6 @@ const ChatRouter = express.Router();
 
 ChatRouter.get("/getChat", protect, getChatController);
 ChatRouter.post("/createNewChat", protect, createNewChatController);
-ChatRouter.delete("/deleteChat", protect, deleteChatController);
+ChatRouter.post("/deleteChat", protect, deleteChatController);
 
 export default ChatRouter;
