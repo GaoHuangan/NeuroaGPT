@@ -63,7 +63,10 @@ export const imageMessageService = async (req: Request) => {
 
         await User.updateOne({ _id: userId }, { $inc: { credits: -2 } });
 
-        return reply;
+        return {
+            success: true,
+            data: reply,
+        }
 
     } catch (error: any) {
         throw new AppError(error.message || "Internal Server Error", error.statusCode || 500);

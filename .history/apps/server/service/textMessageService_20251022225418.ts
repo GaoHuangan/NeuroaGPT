@@ -25,7 +25,7 @@ export const textMessageService = async (req: Request) => {
             throw new AppError("Text and chatId are required", 400);
         }
 
-        if (req.user.credits < 1) {
+        if (req.user.credits < 2) {
             throw new AppError("Not enough credits", 400);
         }
 

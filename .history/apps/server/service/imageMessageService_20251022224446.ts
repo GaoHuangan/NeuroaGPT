@@ -60,10 +60,13 @@ export const imageMessageService = async (req: Request) => {
         chat.messages.push(reply);
 
         await chat.save();
+        
+        return {
+            success: true,
+            data: reply,
+        }
 
         await User.updateOne({ _id: userId }, { $inc: { credits: -2 } });
-
-        return reply;
 
     } catch (error: any) {
         throw new AppError(error.message || "Internal Server Error", error.statusCode || 500);

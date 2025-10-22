@@ -36,6 +36,7 @@ export const imageMessageService = async (req: Request) => {
 
         const encodePrompt = encodeURIComponent(prompt);
         const generatedImageUrl = `${process.env.IMAGE_PUBLIC_KEY}/ik-genimg-prompt-${encodePrompt}/Neuroagpt/${Date.now()}.png?tw=w-800,h-800`;
+      
 
         // Trigger generate by fething from Imagekit
         const generateImageByAi = await axios.get(generatedImageUrl, { responseType: "arraybuffer" })
@@ -57,13 +58,17 @@ export const imageMessageService = async (req: Request) => {
             isImage: true,
             isPublished: isPublished,
         }
-        chat.messages.push(reply);
+
+        return {
+            success: true,
+            data: reply,
+        }
+
+            chat.messages.push(reply);
 
         await chat.save();
 
         await User.updateOne({ _id: userId }, { $inc: { credits: -2 } });
-
-        return reply;
 
     } catch (error: any) {
         throw new AppError(error.message || "Internal Server Error", error.statusCode || 500);

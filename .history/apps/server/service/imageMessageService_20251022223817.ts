@@ -6,7 +6,7 @@ import imagekit from "../config/imageAi.js";
 import User from "../models/User.js";
 
 
-export const imageMessageService = async (req: Request) => {
+export const imageMessageService = async (req: Request, res: Response) => {
     try {
         const userId = req.user._id;
         const { prompt, chatId, isPublished } = req.body;
@@ -35,8 +35,8 @@ export const imageMessageService = async (req: Request) => {
         });
 
         const encodePrompt = encodeURIComponent(prompt);
-        const generatedImageUrl = `${process.env.IMAGE_PUBLIC_KEY}/ik-genimg-prompt-${encodePrompt}/Neuroagpt/${Date.now()}.png?tw=w-800,h-800`;
-
+        const generatedImageUrl = `${process.env.IMAGE_PUBLIC_KEY}/
+        ik-genimg-prompt-${encodePrompt}/Neuroagpt/${Date.now}.png?tw=w-800,h-800`;
         // Trigger generate by fething from Imagekit
         const generateImageByAi = await axios.get(generatedImageUrl, { responseType: "arraybuffer" })
 
@@ -57,13 +57,17 @@ export const imageMessageService = async (req: Request) => {
             isImage: true,
             isPublished: isPublished,
         }
+
+        res.status(200).json({
+            success: true,
+            data: reply,
+        })
+
         chat.messages.push(reply);
 
         await chat.save();
 
-        await User.updateOne({ _id: userId }, { $inc: { credits: -2 } });
-
-        return reply;
+        await User.updateOne({ _id: userId }, { credits: req.user.credits - 2 })
 
     } catch (error: any) {
         throw new AppError(error.message || "Internal Server Error", error.statusCode || 500);

@@ -11,12 +11,12 @@ import AppError from "../utils/appError.js";
 export const imageMessageController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // Call the service layer
-    const data = await imageMessageService(req);
+    const response = await imageMessageService(req,res);
 
     // Good practice: respond with a clear data structure
     return res.status(200).json({
       success: true,
-      data,
+      data: response, // wrap data under a "data" key instead of spreading
     });
   } catch (error: any) {
     // Pass the error to centralized error-handling middleware
